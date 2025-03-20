@@ -1,16 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { Roboto } from "next/font/google";
+import { getCssText } from "@/styles";
+import { globalStyles } from "@/styles/global";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -28,9 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  globalStyles()
+
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable}`}>
+      <head>
+        <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
+      </head>
+      <body className={`${roboto.variable}`}>
         {children}
       </body>
     </html>
