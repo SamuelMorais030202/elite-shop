@@ -3,6 +3,9 @@ import { Roboto } from "next/font/google";
 import { getCssText } from "@/styles";
 import { globalStyles } from "@/styles/global";
 
+import logoImg from "../assets/logo.svg";
+import { Container, Header } from "@/styles/pages/app";
+
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
@@ -27,7 +30,14 @@ export default function RootLayout({
         <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
       </head>
       <body className={`${roboto.variable}`}>
-        {children}
+        <Container>
+          <Header>
+            <img src={logoImg.src} alt="Logo" />
+          </Header>
+
+          {children}
+        </Container>
+
       </body>
     </html>
   );
