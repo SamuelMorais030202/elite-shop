@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Roboto } from "next/font/google";
 import { getCssText } from "@/styles";
 import { globalStyles } from "@/styles/global";
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body className={`${roboto.variable}`}>
         <Container>
           <Header>
-            <img src={logoImg.src} alt="Logo" />
+            <Image src={logoImg.src} alt="Logo" width={120} height={52} />
           </Header>
 
           {children}
