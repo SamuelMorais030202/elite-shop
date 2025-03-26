@@ -28,6 +28,7 @@ export default function HomeClient({ products }: IHomeClientProps) {
           <Link
             key={product.id}
             href={`/product/${product.id}`}
+            prefetch={false}
           >
             <Product className="keen-slider__slide">
               <Image

@@ -59,4 +59,4 @@ export async function generateStaticParams() {
   }))
 }
 
-export const revalidate = 60 * 60 * 1;
+export const revalidate = 3600;
