@@ -3,6 +3,7 @@ import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages
 import Image from "next/image";
 import Stripe from "stripe";
 import { BuyButton } from "./components/buy-button";
+import { Metadata } from "next";
 
 export default async function Product({ params }: { params: Promise<{ id: string }>}) {
   const { id } = await params
@@ -57,6 +58,21 @@ export async function generateStaticParams() {
   return response.data.map((product) => ({
     id: product.id
   }))
+}
+
+export async function generateMetadata({ params }: { params:  Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;  // Aguarde o params antes de usá-lo
+
+  // Recupera o produto dinamicamente para obter o nome
+  const data = await stripe.products.retrieve(id, {
+    expand: ["default_price"],
+  });
+
+  const productName = data.name;
+
+  return {
+    title: `${productName} | Elite Shop`,  // Usa o nome do produto dinamicamente
+  };
 }
 
 export const revalidate = 3600;

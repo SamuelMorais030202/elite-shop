@@ -2,10 +2,13 @@ import { IProduct } from "@/types/product";
 import HomeClient from "./home-client";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
+import { Metadata } from "next";
 
-export const metadata = {
-  revalidate: 60 * 60 * 2 // Revalidação a cada 2 horas
+export const metadata: Metadata = {
+  title: 'Home | Elite Shop',
 };
+
+export const revalidate = 3600 
 
 export default async function Home() {
   const response = await stripe.products.list({
@@ -26,5 +29,9 @@ export default async function Home() {
     }
   })
 
-  return <HomeClient products={products} />
+  return (
+    <>
+      <HomeClient products={products} />
+    </>
+  )
 }
