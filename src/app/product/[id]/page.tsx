@@ -2,6 +2,7 @@ import { stripe } from "@/lib/stripe";
 import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages/product";
 import Image from "next/image";
 import Stripe from "stripe";
+import { BuyButton } from "./components/buy-button";
 
 export default async function Product({ params }: { params: Promise<{ id: string }>}) {
   const { id } = await params
@@ -20,7 +21,8 @@ export default async function Product({ params }: { params: Promise<{ id: string
       style: 'currency',
       currency: 'BRL'
     }).format((price.unit_amount || 0) / 100),
-    description: data.description
+    description: data.description,
+    defaultPrice: price.id
   }
   
   return (
@@ -40,9 +42,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
 
         <p>{product.description}</p>
 
-        <button>
-          Comprar agora
-        </button>
+        <BuyButton priceId={product.defaultPrice} />
       </ProductDetails>
     </ProductContainer>
   )
