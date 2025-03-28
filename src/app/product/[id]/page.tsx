@@ -61,9 +61,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params:  Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params;  // Aguarde o params antes de usá-lo
+  const { id } = await params;
 
-  // Recupera o produto dinamicamente para obter o nome
   const data = await stripe.products.retrieve(id, {
     expand: ["default_price"],
   });
@@ -71,7 +70,7 @@ export async function generateMetadata({ params }: { params:  Promise<{ id: stri
   const productName = data.name;
 
   return {
-    title: `${productName} | Elite Shop`,  // Usa o nome do produto dinamicamente
+    title: `${productName} | Elite Shop`,
   };
 }
 

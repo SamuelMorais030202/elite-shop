@@ -1,5 +1,6 @@
 import { stripe } from "@/lib/stripe";
 import { ImageContainer, SuccessContainer } from "@/styles/pages/success";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -47,3 +48,7 @@ export default async function Success(props: {
     </SuccessContainer>
   )
 }
+
+export const metadata: Metadata = {
+  title: 'Compra efetuada | Elite Shop',
+};
